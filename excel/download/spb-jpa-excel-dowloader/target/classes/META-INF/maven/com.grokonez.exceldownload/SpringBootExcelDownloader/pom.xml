@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.grokonez.exceldownload</groupId>
-	<artifactId>spb-excel-downloader</artifactId>
+	<artifactId>SpringBootExcelDownloader</artifactId>
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 

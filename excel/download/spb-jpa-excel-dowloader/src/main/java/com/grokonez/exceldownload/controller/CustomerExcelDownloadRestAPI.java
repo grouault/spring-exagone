@@ -7,7 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,12 +30,20 @@ public class CustomerExcelDownloadRestAPI {
 		
 		ByteArrayInputStream in = ExcelGenerator.customersToExcel(customers);
 		// return IOUtils.toByteArray(in);
-		
+
+		// headers
+		// - content-type
+		// - content-disposition
 		HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "attachment; filename=customers.xlsx");
-		
-		 return ResponseEntity
-	                .ok()
+        String mimeType = "application/vmd.openxmlformats-officedocument.wordprocessingml.document";
+        MediaType mediaType = MediaType.parseMediaType(mimeType);
+        
+        
+        BodyBuilder response = ResponseEntity.ok();
+        response.contentType(mediaType);
+        
+		 return response
 	                .headers(headers)
 	                .body(new InputStreamResource(in));
     }
